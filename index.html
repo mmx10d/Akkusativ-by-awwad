@@ -741,119 +741,135 @@
     <!-- الجزء الرابع (4 من 4): محرك مستشعر الاتجاه والتحميل أوفلاين والتشغيل النهائي (JavaScript) -->
 
     // دالة محرك العجلة الدوارة بمستشعر اتجاه ذكي ومضمون 100% لحل مشكلة تعليق شاشة الجوال
-    function createSmartSensorWheel(boxId, wheelId, onUpdateCallback, initialIndex) {
-      const box = document.getElementById(boxId);
-      const wheel = document.getElementById(wheelId);
-      const items = wheel.querySelectorAll('.item');
-      
-      let currentIndex = initialIndex;
-      let startX = 0;
-      let startY = 0;
-      let isDragging = false;
-      let isFirstMove = true;
-      let scrollLock = false;
+    // الدالة المحدثة بالكامل لحل مشكلة عدم التوسط والـ Snap لمنتصف الصندوق تماماً
+          // الدالة النهائية المطورة لحل مشاكل التوسط والانزياح في الجوال والكمبيوتر
+            function createSmartSensorWheel(boxId, wheelId, onUpdateCallback, initialIndex) {
+              const box = document.getElementById(boxId);
+              const wheel = document.getElementById(wheelId);
+              const items = wheel.querySelectorAll('.item');
 
-      function getItemHeight() {
-        return items.offsetHeight || 50;
-      }
+              let currentIndex = initialIndex;
+              let startX = 0;
+              let startY = 0;
+              let isDragging = false;
+              let isFirstMove = true;
+              let scrollLock = false;
 
-      function updateLayout(additionalOffset = 0) {
-        const itemHeight = getItemHeight();
-        const boxHeight = box.clientHeight;
-        const centerPosition = (boxHeight / 2) - (itemHeight / 2);
-        const baseTranslateY = -currentIndex * itemHeight + centerPosition;
-        const finalTranslateY = baseTranslateY + additionalOffset;
-        
-        wheel.style.transform = `translateY(${finalTranslateY}px)`;
+              // حساب الارتفاع الفعلي الدقيق لأول عنصر نشط متجاوب مع مقاس الشاشة
+              function getItemHeight() {
+                if (items.length > 0) {
+                  return items[0].getBoundingClientRect().height;
+                }
+                return 50;
+              }
 
-        items.forEach((item, idx) => {
-          item.classList.remove('active', 'neighbor');
-          const itemCenterPos = (idx * itemHeight) + finalTranslateY + (itemHeight / 2);
-          const distanceFromCenter = Math.abs(itemCenterPos - (boxHeight / 2));
+              function updateLayout(additionalOffset = 0) {
+                const itemHeight = getItemHeight();
+                const boxHeight = box.clientHeight;
 
-          if (distanceFromCenter < (itemHeight * 0.5)) {
-            item.classList.add('active');
-          } else if (distanceFromCenter < (itemHeight * 1.5)) {
-            item.classList.add('neighbor');
-          }
-        });
-      }
+                // حساب هندسي صارم لمركز الصندوق بدون كسور مشوهة للتوسط
+                const centerPosition = Math.floor((boxHeight / 2) - (itemHeight / 2));
+                const baseTranslateY = -currentIndex * itemHeight + centerPosition;
+                const finalTranslateY = baseTranslateY + additionalOffset;
 
-      const onStart = (e) => {
-        const touch = e.touches ? e.touches[0] : e;
-        startX = touch.clientX;
-        startY = touch.clientY;
-        isDragging = true;
-        isFirstMove = true;
-        scrollLock = false;
-        updateLayout(0);
-      };
+                wheel.style.transform = `translateY(${finalTranslateY}px)`;
 
-      const onMove = (e) => {
-        if (!isDragging) return;
-        
-        const touch = e.touches ? e.touches[0] : e;
-        const deltaX = touch.clientX - startX;
-        const deltaY = touch.clientY - startY;
+                items.forEach((item, idx) => {
+                  item.classList.remove('active', 'neighbor');
+                  const itemCenterPos = (idx * itemHeight) + finalTranslateY + (itemHeight / 2);
+                  const distanceFromCenter = Math.abs(itemCenterPos - (boxHeight / 2));
 
-        // مستشعر الاتجاه: فحص الحركة في أول 10 بكسل لتحديد نية المستخدم
-        if (isFirstMove && e.touches) {
-          isFirstMove = false;
-          // إذا كان التمرير مائلاً أو يميل للأفقي بشكل ملحوظ ← اتركه لتمرير الشاشة طبيعياً
-          if (Math.abs(deltaX) > Math.abs(deltaY) * 0.7 || Math.abs(deltaY) < 6) {
-            isDragging = false; // إلغاء السحب على العجلة فوراً
-            return;
-          } else {
-            scrollLock = true; // قفل التمرير لأن المستخدم يسحب عمودياً بدقة لتغيير الكلمة
-            box.classList.add('active-drag');
-            if (navigator.vibrate) {
-              navigator.vibrate(25); // نبضة اهتزاز تأكيدية في الجوال
+                  if (distanceFromCenter < (itemHeight * 0.5)) {
+                    item.classList.add('active');
+                  } else if (distanceFromCenter < (itemHeight * 1.5)) {
+                    item.classList.add('neighbor');
+                  }
+                });
+              }
+
+              const onStart = (e) => {
+                // التقاط اللمسة الأولى بدقة تامة للجوال أو الفأرة للكمبيوتر
+                const touch = e.touches ? e.touches[0] : e;
+                startX = touch.clientX;
+                startY = touch.clientY;
+                isDragging = true;
+                isFirstMove = true;
+                scrollLock = false;
+
+                wheel.style.transition = 'none'; // إلغاء الأنيميشن أثناء السحب اللحظي
+                updateLayout(0);
+              };
+
+              const onMove = (e) => {
+                if (!isDragging) return;
+
+                const touch = e.touches ? e.touches[0] : e;
+                const deltaX = touch.clientX - startX;
+                const deltaY = touch.clientY - startY;
+
+                // مستشعر الاتجاه الذكي لفصل تصفح الشاشة عن تدوير العجلة
+                if (isFirstMove && e.touches) {
+                  isFirstMove = false;
+                  if (Math.abs(deltaX) > Math.abs(deltaY) * 0.7 || Math.abs(deltaY) < 6) {
+                    isDragging = false;
+                    return;
+                  } else {
+                    scrollLock = true;
+                    box.classList.add('active-drag');
+                    if (navigator.vibrate) {
+                      navigator.vibrate(25);
+                    }
+                  }
+                }
+
+                if (!e.touches || scrollLock) {
+                  if (e.cancelable) e.preventDefault();
+                  updateLayout(deltaY);
+                }
+              };
+
+              const onEnd = (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                box.classList.remove('active-drag');
+
+                // إضافة تأثير ارتداد ناعم واحترافي عند استقرار الكلمة بالسنتر (Snap Bounce)
+                wheel.style.transition = 'transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.15)';
+
+                // التصحيح البرمجي لالتقاط إحداثيات الإصبع لحظة الرفع من الشاشة
+                const touch = e.changedTouches ? e.changedTouches[0] : e;
+                const totalDeltaY = touch.clientY - startY;
+                const itemHeight = getItemHeight();
+
+                if (!e.changedTouches || scrollLock) {
+                  // حساب رياضي مبني على التقريب لأقرب عنصر صحيح لمنع الانزياح الكسري
+                  const indexChange = Math.round(-totalDeltaY / itemHeight);
+                  let targetIndex = currentIndex + indexChange;
+
+                  targetIndex = Math.max(0, Math.min(items.length - 1, targetIndex));
+                  currentIndex = targetIndex;
+                }
+
+                // إجبار العجلة على التوسط المطلق وتصفير أي إزاحة إضافية
+                updateLayout(0);
+                onUpdateCallback(currentIndex);
+              };
+
+              // ربط الأحداث المحدثة والآمنة
+              box.addEventListener('mousedown', onStart);
+              window.addEventListener('mousemove', onMove);
+              window.addEventListener('mouseup', onEnd);
+
+              box.addEventListener('touchstart', onStart, { passive: true });
+              box.addEventListener('touchmove', onMove, { passive: false });
+              box.addEventListener('touchend', onEnd);
+              box.addEventListener('touchcancel', onEnd);
+
+              window.addEventListener('resize', () => updateLayout(0));
+              // تهيئة تشغيلية بعد حساب الأبعاد الكاملة للواجهة
+              setTimeout(() => updateLayout(0), 150);
             }
-          }
-        }
 
-        // للكمبيوتر أو عندما يتم تأكيد قفل التمرير العمودي للعجلة
-        if (!e.touches || scrollLock) {
-          if (e.cancelable) e.preventDefault();
-          updateLayout(deltaY);
-        }
-      };
-
-      const onEnd = (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        box.classList.remove('active-drag');
-
-        const touch = e.changedTouches ? e.changedTouches[0] : e;
-        const totalDeltaY = touch.clientY - startY;
-        const itemHeight = getItemHeight();
-
-        // حساب عدد العناصر التي تم تجاوزها فقط في حال قفل التمرير أو استخدام الفأرة
-        if (!e.changedTouches || scrollLock) {
-          const indexChange = Math.round(-totalDeltaY / itemHeight);
-          let targetIndex = currentIndex + indexChange;
-
-          targetIndex = Math.max(0, Math.min(items.length - 1, targetIndex));
-          currentIndex = targetIndex;
-        }
-
-        updateLayout(0);
-        onUpdateCallback(currentIndex);
-      };
-
-      // ربط مستمعات الأحداث الهجينة بمرونة تامة وكفاءة فائقة
-      box.addEventListener('mousedown', onStart);
-      window.addEventListener('mousemove', onMove);
-      window.addEventListener('mouseup', onEnd);
-
-      box.addEventListener('touchstart', onStart, { passive: true });
-      box.addEventListener('touchmove', onMove, { passive: false });
-      box.addEventListener('touchend', onEnd);
-      box.addEventListener('touchcancel', onEnd);
-
-      window.addEventListener('resize', () => updateLayout(0));
-      setTimeout(() => updateLayout(0), 100);
-    }
 
     // دالة التحديث الشامل وصياغة لوحة الترجمات
     function updateSentenceAndTranslation() {
