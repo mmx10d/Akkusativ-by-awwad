@@ -86,15 +86,14 @@
 
 <!-- i dont have time i want to study i give it to ai gemeini -->
  
-<!-- الجزء الأول (1 من 4): التنسيقات المبسطة والمريحة جداً للعين (HTML & CSS) -->
-<!-- الجزء الأول (1 من 4): التنسيقات الفاخرة للزر الثابت وصندوق التنبيه الاحترافي والتوقيع (HTML & CSS) -->
+<!-- الجزء الأول (1 من 4): التنسيقات والـ CSS المتوافقة مع مستشعر اللمس الذكي (HTML & CSS) -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
-  <title>Learn By Awwad - Offline Pro Edition</title>
+  <title>Learn By Awwad - Multi-Touch Fixed Edition</title>
   <style>
     * {
       margin: 0;
@@ -108,7 +107,7 @@
       --card-bg: #131b2e;
       --border-color: #1e294b;
       --text-main: #f1f5f9;
-      --text-muted: #475569;
+      --text-muted: #334155;
       --primary-color: #3b82f6;
       --accent-color: #10b981;
       --warning-color: #f59e0b;
@@ -128,7 +127,7 @@
       position: relative;
     }
 
-    /* زر تحميل المشروع أوفلاين الثابت هندسياً ومطلق التموضع */
+    /* زر تحميل المشروع أوفلاين الثابت */
     .download-offline-btn {
       position: fixed;
       top: 20px;
@@ -154,11 +153,7 @@
       box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
     }
 
-    .download-offline-btn:active {
-      transform: translateY(1px);
-    }
-
-    /* تصميم نافذة التنبيه الاحترافية المخصصة الفخمة من تصميمي */
+    /* نافذة التنبيه الاحترافية الفخمة المخصصة */
     .custom-alert-overlay {
       position: fixed;
       top: 0;
@@ -235,22 +230,12 @@
       color: #ffffff;
     }
 
-    .alert-btn-confirm:hover {
-      background: #2563eb;
-    }
-
     .alert-btn-cancel {
       background: #1e293b;
       color: #94a3b8;
       border: 1px solid var(--border-color);
     }
 
-    .alert-btn-cancel:hover {
-      background: #334155;
-      color: var(--text-main);
-    }
-
-    /* بقية التنسيقات السابقة المريحة للعين */
     .container {
       max-width: 1050px;
       width: 100%;
@@ -358,6 +343,7 @@
       letter-spacing: 1px;
     }
 
+    /* تعيين التحكم باللمس ليكون متجاوباً أفقياً وعمودياً مع المستشعر الذكي */
     .column-box {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -367,11 +353,21 @@
       overflow: hidden;
       cursor: grab;
       user-select: none;
-      touch-action: none;
+      touch-action: auto;
+      /* السماح للمتصفح بالتحكم باللمس حتى يقرر مستشعرنا الاتجاه */
+      transition: border-color 0.2s;
     }
 
     .column-box:active {
       cursor: grabbing;
+    }
+
+    .column-box.active-drag {
+      border-color: var(--primary-color);
+    }
+
+    .verb-wheel-box.active-drag {
+      border-color: var(--accent-color);
     }
 
     .wheel-list {
@@ -476,7 +472,6 @@
       width: 100%;
     }
 
-    /* توقيعك الاحترافي الفاخر المدمج بالأسفل هندسياً وبشكل ممتع */
     .brand-signature {
       text-align: center;
       font-size: 0.8rem;
@@ -525,7 +520,7 @@
     }
   </style>
 </head>
-<!-- الجزء الثاني (2 من 4): الهيكل الإنشائي ونافذة التنبيه المخصصة والتوقيع (HTML) -->
+<!-- الجزء الثاني (2 من 4): الهيكل الإنشائي المطور بالكامل (HTML) -->
 
 <body>
   <!-- زر تحميل الصفحة للاستخدام بدون اتصال بالإنترنت -->
@@ -539,7 +534,7 @@
     تحميل أوفلاين
   </button>
 
-  <!-- نافذة التنبيه الاحترافية الفخمة من تصميمي بديلًا عن أليرت المتصفح التقليدي -->
+  <!-- نافذة التنبيه الاحترافية الفخمة المخصصة بديلًا عن أليرت المتصفح التقليدي -->
   <div class="custom-alert-overlay" id="customAlert">
     <div class="custom-alert-card">
       <div class="custom-alert-title">حفظ كـ تطبيق مستقل 📱</div>
@@ -623,7 +618,7 @@
       <div class="direct-translation-box" id="directTranslation">جاري صياغة الترجمة الفورية...</div>
     </div>
 
-    <!-- علامة اسمك التجارية الفخمة المدمجة هندسياً وبشكل ممتع بالأسفل -->
+    <!-- علامة اسمك التجارية الفخمة المدمجة هندسياً بالأسفل -->
     <div class="brand-signature">Powered by <span>By Awwad</span></div>
   </div>
   <!-- الجزء الثالث (3 من 4): مصفوفات الأفعال المنطقية وقاموس الترجمة الفصحى (JavaScript) -->
@@ -636,7 +631,7 @@
       2: ["sehe", "siehst", "sieht", "sieht", "sieht", "sehen", "sieht", "sehen", "sehen"],        // sehen (يرى)
       3: ["verstehe", "verstehst", "versteht", "versteht", "versteht", "verstehen", "versteht", "verstehen", "verstehen"], // verstehen (يفهم)
       4: ["höre", "hörst", "hört", "hört", "hört", "hören", "hört", "hören", "hören"],              // hören (يسمع)
-      5: ["besuche", "besuchst", "besucht", "besucht", "besucht", "besuchen", "besucht", "besuchen", "besuchen"], // besuchen (يزور)
+      5: ["besuche", "besucht", "besucht", "besucht", "besucht", "besuchen", "besucht", "besuchen", "besuchen"], // besuchen (يزور)
       6: ["hasse", "hasst", "hasst", "hasst", "hasst", "hassen", "hasst", "hassen", "hassen"]        // hassen (يكره)
     };
 
@@ -743,193 +738,218 @@
 
       return "...";
     }
-    <!-- الجزء الرابع (4 من 4): محرك السحب والتحميل الذكي أوفلاين (JavaScript) -->
+    <!-- الجزء الرابع (4 من 4): محرك مستشعر الاتجاه والتحميل أوفلاين والتشغيل النهائي (JavaScript) -->
 
-      // دالة محرك العجلة الدوارة مع تفعيل السحب اللحظي والاهتزاز فوراً
-      function createInstantWheel(boxId, wheelId, onUpdateCallback, initialIndex) {
-        const box = document.getElementById(boxId);
-        const wheel = document.getElementById(wheelId);
-        const items = wheel.querySelectorAll('.item');
+    // دالة محرك العجلة الدوارة بمستشعر اتجاه ذكي ومضمون 100% لحل مشكلة تعليق شاشة الجوال
+    function createSmartSensorWheel(boxId, wheelId, onUpdateCallback, initialIndex) {
+      const box = document.getElementById(boxId);
+      const wheel = document.getElementById(wheelId);
+      const items = wheel.querySelectorAll('.item');
+      
+      let currentIndex = initialIndex;
+      let startX = 0;
+      let startY = 0;
+      let isDragging = false;
+      let isFirstMove = true;
+      let scrollLock = false;
 
-        let currentIndex = initialIndex;
-        let startY = 0;
-        let isDragging = false;
+      function getItemHeight() {
+        return items.offsetHeight || 50;
+      }
 
-        function getItemHeight() {
-          return items.offsetHeight || 50;
-        }
+      function updateLayout(additionalOffset = 0) {
+        const itemHeight = getItemHeight();
+        const boxHeight = box.clientHeight;
+        const centerPosition = (boxHeight / 2) - (itemHeight / 2);
+        const baseTranslateY = -currentIndex * itemHeight + centerPosition;
+        const finalTranslateY = baseTranslateY + additionalOffset;
+        
+        wheel.style.transform = `translateY(${finalTranslateY}px)`;
 
-        function updateLayout(additionalOffset = 0) {
-          const itemHeight = getItemHeight();
-          const boxHeight = box.clientHeight;
-          const centerPosition = (boxHeight / 2) - (itemHeight / 2);
-          const baseTranslateY = -currentIndex * itemHeight + centerPosition;
-          const finalTranslateY = baseTranslateY + additionalOffset;
+        items.forEach((item, idx) => {
+          item.classList.remove('active', 'neighbor');
+          const itemCenterPos = (idx * itemHeight) + finalTranslateY + (itemHeight / 2);
+          const distanceFromCenter = Math.abs(itemCenterPos - (boxHeight / 2));
 
-          wheel.style.transform = `translateY(${finalTranslateY}px)`;
-
-          items.forEach((item, idx) => {
-            item.classList.remove('active', 'neighbor');
-            const itemCenterPos = (idx * itemHeight) + finalTranslateY + (itemHeight / 2);
-            const distanceFromCenter = Math.abs(itemCenterPos - (boxHeight / 2));
-
-            if (distanceFromCenter < (itemHeight * 0.5)) {
-              item.classList.add('active');
-            } else if (distanceFromCenter < (itemHeight * 1.5)) {
-              item.classList.add('neighbor');
-            }
-          });
-        }
-
-        const onStart = (e) => {
-          const clientY = e.touches ? e.touches.clientY : e.clientY;
-          startY = clientY;
-          isDragging = true;
-
-          if (navigator.vibrate) {
-            navigator.vibrate(25);
+          if (distanceFromCenter < (itemHeight * 0.5)) {
+            item.classList.add('active');
+          } else if (distanceFromCenter < (itemHeight * 1.5)) {
+            item.classList.add('neighbor');
           }
-          updateLayout(0);
-        };
+        });
+      }
 
-        const onMove = (e) => {
-          if (!isDragging) return;
+      const onStart = (e) => {
+        const touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        isDragging = true;
+        isFirstMove = true;
+        scrollLock = false;
+        updateLayout(0);
+      };
+
+      const onMove = (e) => {
+        if (!isDragging) return;
+        
+        const touch = e.touches ? e.touches[0] : e;
+        const deltaX = touch.clientX - startX;
+        const deltaY = touch.clientY - startY;
+
+        // مستشعر الاتجاه: فحص الحركة في أول 10 بكسل لتحديد نية المستخدم
+        if (isFirstMove && e.touches) {
+          isFirstMove = false;
+          // إذا كان التمرير مائلاً أو يميل للأفقي بشكل ملحوظ ← اتركه لتمرير الشاشة طبيعياً
+          if (Math.abs(deltaX) > Math.abs(deltaY) * 0.7 || Math.abs(deltaY) < 6) {
+            isDragging = false; // إلغاء السحب على العجلة فوراً
+            return;
+          } else {
+            scrollLock = true; // قفل التمرير لأن المستخدم يسحب عمودياً بدقة لتغيير الكلمة
+            box.classList.add('active-drag');
+            if (navigator.vibrate) {
+              navigator.vibrate(25); // نبضة اهتزاز تأكيدية في الجوال
+            }
+          }
+        }
+
+        // للكمبيوتر أو عندما يتم تأكيد قفل التمرير العمودي للعجلة
+        if (!e.touches || scrollLock) {
           if (e.cancelable) e.preventDefault();
-          const clientY = e.touches ? e.touches.clientY : e.clientY;
-          const deltaY = clientY - startY;
           updateLayout(deltaY);
-        };
+        }
+      };
 
-        const onEnd = (e) => {
-          if (!isDragging) return;
-          isDragging = false;
+      const onEnd = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        box.classList.remove('active-drag');
 
-          const clientY = (e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches.clientY : e.clientY;
-          const totalDeltaY = clientY - startY;
-          const itemHeight = getItemHeight();
+        const touch = e.changedTouches ? e.changedTouches[0] : e;
+        const totalDeltaY = touch.clientY - startY;
+        const itemHeight = getItemHeight();
 
+        // حساب عدد العناصر التي تم تجاوزها فقط في حال قفل التمرير أو استخدام الفأرة
+        if (!e.changedTouches || scrollLock) {
           const indexChange = Math.round(-totalDeltaY / itemHeight);
           let targetIndex = currentIndex + indexChange;
 
           targetIndex = Math.max(0, Math.min(items.length - 1, targetIndex));
           currentIndex = targetIndex;
+        }
 
-          updateLayout(0);
-          onUpdateCallback(currentIndex);
-        };
+        updateLayout(0);
+        onUpdateCallback(currentIndex);
+      };
 
-        box.addEventListener('mousedown', onStart);
-        window.addEventListener('mousemove', onMove, { passive: false });
-        window.addEventListener('mouseup', onEnd);
+      // ربط مستمعات الأحداث الهجينة بمرونة تامة وكفاءة فائقة
+      box.addEventListener('mousedown', onStart);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onEnd);
 
-        box.addEventListener('touchstart', onStart, { passive: true });
-        box.addEventListener('touchmove', onMove, { passive: false });
-        box.addEventListener('touchend', onEnd);
-        box.addEventListener('touchcancel', onEnd);
+      box.addEventListener('touchstart', onStart, { passive: true });
+      box.addEventListener('touchmove', onMove, { passive: false });
+      box.addEventListener('touchend', onEnd);
+      box.addEventListener('touchcancel', onEnd);
 
-        window.addEventListener('resize', () => updateLayout(0));
-        setTimeout(() => updateLayout(0), 100);
-      }
+      window.addEventListener('resize', () => updateLayout(0));
+      setTimeout(() => updateLayout(0), 100);
+    }
 
-      // دالة التحديث الشامل وصياغة لوحة الترجمات
-      function updateSentenceAndTranslation() {
-        const nomItems = document.querySelectorAll('#nominativWheel .item');
-        const verbItems = document.querySelectorAll('#verbWheel .item');
-        const akkItems = document.querySelectorAll('#akkusativWheel .item');
+    // دالة التحديث الشامل وصياغة لوحة الترجمات
+    function updateSentenceAndTranslation() {
+      const nomItems = document.querySelectorAll('#nominativWheel .item');
+      const verbItems = document.querySelectorAll('#verbWheel .item');
+      const akkItems = document.querySelectorAll('#akkusativWheel .item');
 
-        if (!nomItems.length || !verbItems.length || !akkItems.length) return;
+      if (!nomItems.length || !verbItems.length || !akkItems.length) return;
 
-        const nomItem = nomItems[selectedNomIndex];
-        const akkItem = akkItems[selectedAkkIndex];
+      const nomItem = nomItems[selectedNomIndex];
+      const akkItem = akkItems[selectedAkkIndex];
+      
+      const currentNomText = isArEnabled ? nomItem.getAttribute('data-ar').split(' (') : nomItem.getAttribute('data-en');
+      const currentAkkText = isArEnabled ? akkItem.getAttribute('data-ar').split(' (') : akkItem.getAttribute('data-en');
+      const currentVerbConjugated = verbConjugations[selectedVerbIndex][selectedNomIndex];
 
-        const currentNomText = isArEnabled ? nomItem.getAttribute('data-ar').split(' (') : nomItem.getAttribute('data-en');
-        const currentAkkText = isArEnabled ? akkItem.getAttribute('data-ar').split(' (') : akkItem.getAttribute('data-en');
-        const currentVerbConjugated = verbConjugations[selectedVerbIndex][selectedNomIndex];
-
-        document.getElementById('sentenceOutput').innerHTML = `
+      document.getElementById('sentenceOutput').innerHTML = `
         <span class="nom-hl">${currentNomText}</span> 
         <span class="verb-hl">${currentVerbConjugated}</span> 
         <span class="akk-hl">${currentAkkText}</span>
       `;
 
-        const naturalTranslation = generateNaturalArabic(selectedNomIndex, selectedVerbIndex, selectedAkkIndex);
-        document.getElementById('directTranslation').innerText = naturalTranslation;
-      }
+      const naturalTranslation = generateNaturalArabic(selectedNomIndex, selectedVerbIndex, selectedAkkIndex);
+      document.getElementById('directTranslation').innerText = naturalTranslation;
+    }
 
-      // تفعيل زر التبديل والتحكم بالـ innerText المباشر للضمائر والأفعال بالمستند
-      const langToggle = document.getElementById('langToggle');
-      langToggle.addEventListener('click', () => {
-        langToggle.classList.toggle('active');
-        isArEnabled = langToggle.classList.contains('active');
+    // تفعيل مفتاح تبديل نصوص الجدول (innerText)
+    const langToggle = document.getElementById('langToggle');
+    langToggle.addEventListener('click', () => {
+      langToggle.classList.toggle('active');
+      isArEnabled = langToggle.classList.contains('active');
 
-        document.querySelectorAll('#nominativWheel .item').forEach(item => {
-          item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
-        });
-
-        document.querySelectorAll('#verbWheel .item').forEach(item => {
-          item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
-        });
-
-        document.querySelectorAll('#akkusativWheel .item').forEach(item => {
-          item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
-        });
-
-        updateSentenceAndTranslation();
-        window.dispatchEvent(new Event('resize'));
+      document.querySelectorAll('#nominativWheel .item').forEach(item => {
+        item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
       });
 
-      // --- منطق نافذة التنبيه المخصصة وحزم الملف للتحميل أوفلاين ---
-      const downloadBtn = document.getElementById('downloadBtn');
-      const customAlert = document.getElementById('customAlert');
-      const alertConfirm = document.getElementById('alertConfirm');
-      const alertCancel = document.getElementById('alertCancel');
-
-      // إظهار نافذة التنبيه المخصصة الفخمة عند ضغط زر التحميل
-      downloadBtn.addEventListener('click', () => {
-        customAlert.classList.add('show');
+      document.querySelectorAll('#verbWheel .item').forEach(item => {
+        item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
       });
 
-      // إغلاق النافذة عند الضغط على إلغاء
-      alertCancel.addEventListener('click', () => {
-        customAlert.classList.remove('show');
+      document.querySelectorAll('#akkusativWheel .item').forEach(item => {
+        item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
       });
-
-      // دالة حزم الملف وتنزيله تلقائياً بصيغة مخصصة أوفلاين عند التأكيد
-      alertConfirm.addEventListener('click', () => {
-        customAlert.classList.remove('show');
-
-        // جلب الكود الكامل للمستند الحالي وتحويله لملف قابل للتنزيل
-        const htmlContent = document.documentElement.outerHTML;
-        const blob = new Blob(['<!DOCTYPE html>\n' + htmlContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Akkusativ_By_Awwad_Offline.html';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      });
-
-      // إطلاق محركات التدوير الفورية المستقلة للـ 3 أعمدة
-      createInstantWheel('nominativBox', 'nominativWheel', (idx) => {
-        selectedNomIndex = idx;
-        updateSentenceAndTranslation();
-      }, 0);
-
-      createInstantWheel('verbBox', 'verbWheel', (idx) => {
-        selectedVerbIndex = idx;
-        updateSentenceAndTranslation();
-      }, 0);
-
-      createInstantWheel('akkusativBox', 'akkusativWheel', (idx) => {
-        selectedAkkIndex = idx;
-        updateSentenceAndTranslation();
-      }, 0);
 
       updateSentenceAndTranslation();
-    </script>
-  </body>
-  
-  </html>
+      window.dispatchEvent(new Event('resize'));
+    });
+
+    // --- منطق نافذة التنبيه وحزم الملف للتحميل أوفلاين ---
+    const downloadBtn = document.getElementById('downloadBtn');
+    const customAlert = document.getElementById('customAlert');
+    const alertConfirm = document.getElementById('alertConfirm');
+    const alertCancel = document.getElementById('alertCancel');
+
+    downloadBtn.addEventListener('click', () => {
+      customAlert.classList.add('show');
+    });
+
+    alertCancel.addEventListener('click', () => {
+      customAlert.classList.remove('show');
+    });
+
+    alertConfirm.addEventListener('click', () => {
+      customAlert.classList.remove('show');
+      
+      const htmlContent = document.documentElement.outerHTML;
+      const blob = new Blob(['<!DOCTYPE html>\n' + htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Akkusativ_By_Awwad_Offline.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // إطلاق محركات التدوير بمستشعر ذكي مستقل للـ 3 أعمدة
+    createSmartSensorWheel('nominativBox', 'nominativWheel', (idx) => {
+      selectedNomIndex = idx;
+      updateSentenceAndTranslation();
+    }, 0);
+
+    createSmartSensorWheel('verbBox', 'verbWheel', (idx) => {
+      selectedVerbIndex = idx;
+      updateSentenceAndTranslation();
+    }, 0);
+
+    createSmartSensorWheel('akkusativBox', 'akkusativWheel', (idx) => {
+      selectedAkkIndex = idx;
+      updateSentenceAndTranslation();
+    }, 0);
+
+    updateSentenceAndTranslation();
+  </script>
+</body>
+
+</html>
