@@ -1,0 +1,935 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn By Awwad</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      --body-padding--: 50px;
+      --box-width--: 300px;
+      --box-height--: 300px;
+    }
+    body {
+      background-color: #111;
+      color: white;
+      width: calc(100vw-var(--body-padding--));
+      height: calc(100vh-var(--body-padding--));
+      padding: var(--body-padding--);
+      font-size: larger;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    main {
+      display: flex;
+      justify-content: space-evenly;
+    }
+    main div {
+      display: flex;
+      flex-direction: column;
+    }
+    main span {
+      align-self: center;
+    }
+    main div, main span {
+      border: 1px solid white;
+      align-items: center;
+      width: var(--box-width--);
+      height: var(--box-height--);
+    }
+    /* this for not near choose when space is more than 1 */
+    .force_hide {
+      display: none;
+    }
+    /* this for near choose to make it visible when press */
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <header>
+      <h1>Akkusativ:</h1>
+    </header>
+    <main>
+      <div>
+        <span class="selected" id="ich">ich</span>
+        <span class="hide" id="du">du</span>
+        <span class="force_hide" id="du">er | sie | es</span>
+        <span class="force_hide" id="du">wir</span>
+        <span class="force_hide" id="du">ihr</span>
+        <span class="force_hide" id="du">Sie | sie</span>
+      </div>
+      <span>Frage</span>
+      <div>
+        <span>mich</span>
+        <span>dich</span>
+        <span>ihn | sie | es</span>
+        <span>uns</span>
+        <span>euch</span>
+        <span>Sie | sie</span>
+      </div>
+    </main>
+  </div>
+</body>
+</html> -->
+
+
+
+<!-- i dont have time i want to study i give it to ai gemeini -->
+ 
+<!-- الجزء الأول (1 من 4): التنسيقات المبسطة والمريحة جداً للعين (HTML & CSS) -->
+<!-- الجزء الأول (1 من 4): التنسيقات الفاخرة للزر الثابت وصندوق التنبيه الاحترافي والتوقيع (HTML & CSS) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
+  <title>Learn By Awwad - Offline Pro Edition</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: #131b2e;
+      --border-color: #1e294b;
+      --text-main: #f1f5f9;
+      --text-muted: #475569;
+      --primary-color: #3b82f6;
+      --accent-color: #10b981;
+      --warning-color: #f59e0b;
+      --group-3rd: #f59e0b;
+      --group-polite: #8b5cf6;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      overflow-x: hidden;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* زر تحميل المشروع أوفلاين الثابت هندسياً ومطلق التموضع */
+    .download-offline-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      border: none;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .download-offline-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+
+    .download-offline-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* تصميم نافذة التنبيه الاحترافية المخصصة الفخمة من تصميمي */
+    .custom-alert-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .custom-alert-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .custom-alert-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 420px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .custom-alert-overlay.show .custom-alert-card {
+      transform: scale(1);
+    }
+
+    .custom-alert-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      direction: rtl;
+    }
+
+    .custom-alert-msg {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      direction: rtl;
+    }
+
+    .custom-alert-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .alert-btn {
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .alert-btn-confirm {
+      background: var(--primary-color);
+      color: #ffffff;
+    }
+
+    .alert-btn-confirm:hover {
+      background: #2563eb;
+    }
+
+    .alert-btn-cancel {
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid var(--border-color);
+    }
+
+    .alert-btn-cancel:hover {
+      background: #334155;
+      color: var(--text-main);
+    }
+
+    /* بقية التنسيقات السابقة المريحة للعين */
+    .container {
+      max-width: 1050px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    @media (min-width: 821px) {
+      header {
+        padding-left: 140px;
+      }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.2s;
+    }
+
+    .toggle-track {
+      width: 36px;
+      height: 18px;
+      background-color: #334155;
+      border-radius: 9px;
+      position: relative;
+    }
+
+    .toggle-circle {
+      width: 14px;
+      height: 14px;
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .lang-switch.active .toggle-track {
+      background-color: var(--accent-color);
+    }
+
+    .lang-switch.active .toggle-circle {
+      transform: translateX(18px);
+    }
+
+    .lang-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    .box-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .box-title {
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      color: #94a3b8;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .box-title span {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .column-box {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      height: 150px;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .column-box:active {
+      cursor: grabbing;
+    }
+
+    .wheel-list {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .item {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      opacity: 0.2;
+      transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease, font-size 0.2s ease;
+      transform: scale(0.95);
+      text-align: center;
+    }
+
+    .item.active {
+      color: var(--text-main);
+      opacity: 1;
+      font-size: 1.3rem;
+      font-weight: 600;
+      transform: scale(1.05);
+    }
+
+    .item.active.cat-3rd,
+    .item.neighbor.cat-3rd {
+      color: var(--group-3rd);
+    }
+
+    .item.active.cat-polite,
+    .item.neighbor.cat-polite {
+      color: var(--group-polite);
+    }
+
+    .item.active.verb-active {
+      color: var(--accent-color);
+    }
+
+    .item.neighbor {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+
+    .translation-footer {
+      width: 100%;
+      background: #0e1322;
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      border-radius: 12px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .sentence-output {
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .sentence-output span {
+      padding: 2px 8px;
+    }
+
+    .sentence-output span.nom-hl {
+      color: var(--primary-color);
+    }
+
+    .sentence-output span.verb-hl {
+      color: var(--accent-color);
+    }
+
+    .sentence-output span.akk-hl {
+      color: var(--warning-color);
+    }
+
+    .direct-translation-box {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ffffff;
+      direction: rtl;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* توقيعك الاحترافي الفاخر المدمج بالأسفل هندسياً وبشكل ممتع */
+    .brand-signature {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #334155;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 5px;
+      user-select: none;
+    }
+
+    .brand-signature span {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    @media (max-width: 820px) {
+      body {
+        padding-top: 80px;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .column-box {
+        height: 130px;
+      }
+
+      .item {
+        height: 44px;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .sentence-output {
+        font-size: 1.15rem;
+      }
+
+      .direct-translation-box {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<!-- الجزء الثاني (2 من 4): الهيكل الإنشائي ونافذة التنبيه المخصصة والتوقيع (HTML) -->
+
+<body>
+  <!-- زر تحميل الصفحة للاستخدام بدون اتصال بالإنترنت -->
+  <button class="download-offline-btn" id="downloadBtn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+    تحميل أوفلاين
+  </button>
+
+  <!-- نافذة التنبيه الاحترافية الفخمة من تصميمي بديلًا عن أليرت المتصفح التقليدي -->
+  <div class="custom-alert-overlay" id="customAlert">
+    <div class="custom-alert-card">
+      <div class="custom-alert-title">حفظ كـ تطبيق مستقل 📱</div>
+      <div class="custom-alert-msg">هل تريد تحميل هذه الصفحة على جهازك لتتمكن من مراجعة ودراسة قاعدة الـ Akkusativ في أي
+        وقت بدون الحاجة للاتصال بالإنترنت؟</div>
+      <div class="custom-alert-actions">
+        <button class="alert-btn alert-btn-confirm" id="alertConfirm">نعم، تحميل</button>
+        <button class="alert-btn alert-btn-cancel" id="alertCancel">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Akkusativ</h1>
+      <div class="lang-switch" id="langToggle">
+        <span class="lang-label">ترجمة الكلمات بالجدول</span>
+        <div class="toggle-track">
+          <div class="toggle-circle"></div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- العمود الأول: الفاعل وعنوانه المخصص -->
+      <div class="box-wrapper">
+        <div class="box-title">الفاعل<span>Nominativ</span></div>
+        <div class="column-box" id="nominativBox">
+          <div class="wheel-list" id="nominativWheel">
+            <div class="item" data-index="0" data-en="ich" data-ar="ich (أنا)">ich</div>
+            <div class="item" data-index="1" data-en="du" data-ar="du (أنتُ)">du</div>
+            <div class="item cat-3rd" data-index="2" data-en="er" data-ar="er (هو)">er</div>
+            <div class="item cat-3rd" data-index="3" data-en="sie" data-ar="sie (هي)">sie</div>
+            <div class="item cat-3rd" data-index="4" data-en="es" data-ar="es (هو/هي للمحايد)">es</div>
+            <div class="item" data-index="5" data-en="wir" data-ar="wir (نحن)">wir</div>
+            <div class="item" data-index="6" data-en="ihr" data-ar="ihr (أنتم)">ihr</div>
+            <div class="item cat-polite" data-index="7" data-en="sie (Plural)" data-ar="sie (هم)">sie</div>
+            <div class="item cat-polite" data-index="8" data-en="Sie (Höflich)" data-ar="Sie (حضرتك)">Sie</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- العمود الثاني: الأفعال المنطقية وعنوانها المخصص -->
+      <div class="box-wrapper">
+        <div class="box-title">الفعل المتعدي<span>Verb</span></div>
+        <div class="column-box" id="verbBox">
+          <div class="wheel-list" id="verbWheel">
+            <div class="item verb-active" data-index="0" data-en="fragen" data-ar="fragen (يسأل)">fragen</div>
+            <div class="item verb-active" data-index="1" data-en="lieben" data-ar="lieben (يحب)">lieben</div>
+            <div class="item verb-active" data-index="2" data-en="sehen" data-ar="sehen (يرى)">sehen</div>
+            <div class="item verb-active" data-index="3" data-en="verstehen" data-ar="verstehen (يفهم)">verstehen</div>
+            <div class="item verb-active" data-index="4" data-en="hören" data-ar="hören (يسمع)">hören</div>
+            <div class="item verb-active" data-index="5" data-en="besuchen" data-ar="besuchen (يزور)">besuchen</div>
+            <div class="item verb-active" data-index="6" data-en="hassen" data-ar="hassen (يكره)">hassen</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- العمود الثالث: المفعول به وعنوانه المخصص -->
+      <div class="box-wrapper">
+        <div class="box-title">المفعول به<span>Akkusativ</span></div>
+        <div class="column-box" id="akkusativBox">
+          <div class="wheel-list" id="akkusativWheel">
+            <div class="item" data-index="0" data-en="mich" data-ar="mich (ني / إياي)">mich</div>
+            <div class="item" data-index="1" data-en="dich" data-ar="dich (كَ / إياك)">dich</div>
+            <div class="item cat-3rd" data-index="2" data-en="ihn" data-ar="ihn (هُ / إياه)">ihn</div>
+            <div class="item cat-3rd" data-index="3" data-en="sie" data-ar="sie (ها / إياها)">sie</div>
+            <div class="item cat-3rd" data-index="4" data-en="es" data-ar="es (المحايد / إياه)">es</div>
+            <div class="item" data-index="5" data-en="uns" data-ar="uns (نا / إيانا)">uns</div>
+            <div class="item" data-index="6" data-en="euch" data-ar="euch (كم / إياكم)">euch</div>
+            <div class="item cat-polite" data-index="7" data-en="sie (Plural)" data-ar="sie (هم / إياهم)">sie</div>
+            <div class="item cat-polite" data-index="8" data-en="Sie (Höflich)" data-ar="Sie (حضرتك / إياكم)">Sie</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- شريط عرض الجملة والترجمة الفورية المبسط والمريح للعين -->
+    <div class="translation-footer">
+      <div class="sentence-output" id="sentenceOutput"></div>
+      <div class="direct-translation-box" id="directTranslation">جاري صياغة الترجمة الفورية...</div>
+    </div>
+
+    <!-- علامة اسمك التجارية الفخمة المدمجة هندسياً وبشكل ممتع بالأسفل -->
+    <div class="brand-signature">Powered by <span>By Awwad</span></div>
+  </div>
+  <!-- الجزء الثالث (3 من 4): مصفوفات الأفعال المنطقية وقاموس الترجمة الفصحى (JavaScript) -->
+  <script>
+    // 1. تصريف الأفعال السبعة المنطقية تماماً تزامناً مع الضمائر الشخصية الـ 9 المفصولة
+    // الترتيب النحوي الداخلي: [ich, du, er, sie, es, wir, ihr, sie جمع, Sie رسمي]
+    const verbConjugations = {
+      0: ["frage", "fragst", "fragt", "fragt", "fragt", "fragen", "fragt", "fragen", "fragen"],      // fragen (يسأل)
+      1: ["liebe", "liebst", "liebt", "liebt", "liebt", "lieben", "liebt", "lieben", "lieben"],      // lieben (يحب)
+      2: ["sehe", "siehst", "sieht", "sieht", "sieht", "sehen", "sieht", "sehen", "sehen"],        // sehen (يرى)
+      3: ["verstehe", "verstehst", "versteht", "versteht", "versteht", "verstehen", "versteht", "verstehen", "verstehen"], // verstehen (يفهم)
+      4: ["höre", "hörst", "hört", "hört", "hört", "hören", "hört", "hören", "hören"],              // hören (يسمع)
+      5: ["besuche", "besuchst", "besucht", "besucht", "besucht", "besuchen", "besucht", "besuchen", "besuchen"], // besuchen (يزور)
+      6: ["hasse", "hasst", "hasst", "hasst", "hasst", "hassen", "hasst", "hassen", "hassen"]        // hassen (يكره)
+    };
+
+    // 2. مصفوفات توليد الضمائر في اللغة العربية الفصحى
+    const subjectAr = ["أنا", "أنتَ", "هو", "هي", "هو/هي (للمحايد)", "نحن", "أنتم", "هم", "حضرتكم"];
+    const objectSuffix = ["ـني", "ـكَ", "ـهُ", "ـها", "ـهُ/ـها", "ـنا", "ـكم", "ـهم", "ـكم (لحضرتكم)"];
+
+    // ضمائر منفصلة أو مخصصة لبعض السياقات البلاغية مثل "يحب أنفسنا" أو "نفسي"
+    const reflexiveAr = ["نفسي", "نفسكَ", "نفسهُ", "نفسَها", "نفسهُ", "أنفسنا", "أنفسكم", "أنفسهم", "حضرتكم / أنفسكم"];
+
+    let selectedNomIndex = 0;
+    let selectedVerbIndex = 0;
+    let selectedAkkIndex = 0;
+    let isArEnabled = false;
+
+    // دالة محرك الذكاء اللغوي لإنتاج ترجمة عربية صحيحة وقواعدية 100% وخالية من الأخطاء المنطقية
+    function generateNaturalArabic(nom, verb, akk) {
+      const isReflexive = (nom === akk);
+      let vBase = "";
+
+      if (verb === 0) { // fragen (يسأل)
+        if (nom === 0) vBase = "أسألُ";
+        else if (nom === 1) vBase = "تسألُ";
+        else if (nom === 2 || nom === 4) vBase = "يسألُ";
+        else if (nom === 3) vBase = "تسألُ";
+        else if (nom === 5) vBase = "نسألُ";
+        else if (nom === 6 || nom === 8) vBase = "تسألون";
+        else if (nom === 7) vBase = "يسألون";
+
+        return isReflexive ? `${subjectAr[nom]} ${vBase} ${reflexiveAr[nom]}.` : `${subjectAr[nom]} ${vBase}${objectSuffix[akk]}.`;
+      }
+
+      else if (verb === 1) { // lieben (يحب)
+        if (nom === 0) vBase = "أحبُّ";
+        else if (nom === 1) vBase = "تحبُّ";
+        else if (nom === 2 || nom === 4) vBase = "يحبُّ";
+        else if (nom === 3) vBase = "تحبُّ";
+        else if (nom === 5) vBase = "نحبُّ";
+        else if (nom === 6 || nom === 8) vBase = "تحبون";
+        else if (nom === 7) vBase = "يحبون";
+
+        return isReflexive ? `${subjectAr[nom]} ${vBase} ${reflexiveAr[nom]}.` : `${subjectAr[nom]} ${vBase}${objectSuffix[akk].replace('ـ', '')}.`;
+      }
+
+      else if (verb === 2) { // sehen (يرى)
+        if (nom === 0) vBase = "أرى";
+        else if (nom === 1) vBase = "ترى";
+        else if (nom === 2 || nom === 4) vBase = "يرى";
+        else if (nom === 3) vBase = "ترى";
+        else if (nom === 5) vBase = "نرى";
+        else if (nom === 6 || nom === 8) vBase = "ترون";
+        else if (nom === 7) vBase = "يرون";
+
+        return isReflexive ? `${subjectAr[nom]} ${vBase} ${reflexiveAr[nom]}.` : `${subjectAr[nom]} ${vBase}${objectSuffix[akk]}.`;
+      }
+
+      else if (verb === 3) { // verstehen (يفهم)
+        if (nom === 0) vBase = "أفهمُ";
+        else if (nom === 1) vBase = "تفهمُ";
+        else if (nom === 2 || nom === 4) vBase = "يفهمُ";
+        else if (nom === 3) vBase = "تفهمُ";
+        else if (nom === 5) vBase = "نفهمُ";
+        else if (nom === 6 || nom === 8) vBase = "تفهمون";
+        else if (nom === 7) vBase = "يفهمون";
+
+        return isReflexive ? `${subjectAr[nom]} ${vBase} ${reflexiveAr[nom]}.` : `${subjectAr[nom]} ${vBase}${objectSuffix[akk]}.`;
+      }
+
+      else if (verb === 4) { // hören (يسمع)
+        if (nom === 0) vBase = "أسمعُ";
+        else if (nom === 1) vBase = "تسمعُ";
+        else if (nom === 2 || nom === 4) vBase = "يسمعُ";
+        else if (nom === 3) vBase = "تسمعُ";
+        else if (nom === 5) vBase = "نسمعُ";
+        else if (nom === 6 || nom === 8) vBase = "تسمعون";
+        else if (nom === 7) vBase = "يسمعون";
+
+        return isReflexive ? `${subjectAr[nom]} ${vBase} ${reflexiveAr[nom]}.` : `${subjectAr[nom]} ${vBase}${objectSuffix[akk]}.`;
+      }
+
+      else if (verb === 5) { // besuchen (يزور)
+        if (nom === 0) vBase = "أزورُ";
+        else if (nom === 1) vBase = "تزورُ";
+        else if (nom === 2 || nom === 4) vBase = "يزورُ";
+        else if (nom === 3) vBase = "تزورُ";
+        else if (nom === 5) vBase = "نزورُ";
+        else if (nom === 6 || nom === 8) vBase = "تزورون";
+        else if (nom === 7) vBase = "يزورون";
+
+        return isReflexive ? `${subjectAr[nom]} ${vBase} ${reflexiveAr[nom]}.` : `${subjectAr[nom]} ${vBase}${objectSuffix[akk]}.`;
+      }
+
+      else if (verb === 6) { // hassen (يكره)
+        if (nom === 0) vBase = "أكرهُ";
+        else if (nom === 1) vBase = "تكرهُ";
+        else if (nom === 2 || nom === 4) vBase = "يكرهُ";
+        else if (nom === 3) vBase = "تكرهُ";
+        else if (nom === 5) vBase = "نكرهُ";
+        else if (nom === 6 || nom === 8) vBase = "تكرهون";
+        else if (nom === 7) vBase = "يكرهون";
+
+        return isReflexive ? `${subjectAr[nom]} ${vBase} ${reflexiveAr[nom]}.` : `${subjectAr[nom]} ${vBase}${objectSuffix[akk].replace('ـ', '')}.`;
+      }
+
+      return "...";
+    }
+    <!-- الجزء الرابع (4 من 4): محرك السحب والتحميل الذكي أوفلاين (JavaScript) -->
+
+      // دالة محرك العجلة الدوارة مع تفعيل السحب اللحظي والاهتزاز فوراً
+      function createInstantWheel(boxId, wheelId, onUpdateCallback, initialIndex) {
+        const box = document.getElementById(boxId);
+        const wheel = document.getElementById(wheelId);
+        const items = wheel.querySelectorAll('.item');
+
+        let currentIndex = initialIndex;
+        let startY = 0;
+        let isDragging = false;
+
+        function getItemHeight() {
+          return items.offsetHeight || 50;
+        }
+
+        function updateLayout(additionalOffset = 0) {
+          const itemHeight = getItemHeight();
+          const boxHeight = box.clientHeight;
+          const centerPosition = (boxHeight / 2) - (itemHeight / 2);
+          const baseTranslateY = -currentIndex * itemHeight + centerPosition;
+          const finalTranslateY = baseTranslateY + additionalOffset;
+
+          wheel.style.transform = `translateY(${finalTranslateY}px)`;
+
+          items.forEach((item, idx) => {
+            item.classList.remove('active', 'neighbor');
+            const itemCenterPos = (idx * itemHeight) + finalTranslateY + (itemHeight / 2);
+            const distanceFromCenter = Math.abs(itemCenterPos - (boxHeight / 2));
+
+            if (distanceFromCenter < (itemHeight * 0.5)) {
+              item.classList.add('active');
+            } else if (distanceFromCenter < (itemHeight * 1.5)) {
+              item.classList.add('neighbor');
+            }
+          });
+        }
+
+        const onStart = (e) => {
+          const clientY = e.touches ? e.touches.clientY : e.clientY;
+          startY = clientY;
+          isDragging = true;
+
+          if (navigator.vibrate) {
+            navigator.vibrate(25);
+          }
+          updateLayout(0);
+        };
+
+        const onMove = (e) => {
+          if (!isDragging) return;
+          if (e.cancelable) e.preventDefault();
+          const clientY = e.touches ? e.touches.clientY : e.clientY;
+          const deltaY = clientY - startY;
+          updateLayout(deltaY);
+        };
+
+        const onEnd = (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+
+          const clientY = (e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches.clientY : e.clientY;
+          const totalDeltaY = clientY - startY;
+          const itemHeight = getItemHeight();
+
+          const indexChange = Math.round(-totalDeltaY / itemHeight);
+          let targetIndex = currentIndex + indexChange;
+
+          targetIndex = Math.max(0, Math.min(items.length - 1, targetIndex));
+          currentIndex = targetIndex;
+
+          updateLayout(0);
+          onUpdateCallback(currentIndex);
+        };
+
+        box.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove, { passive: false });
+        window.addEventListener('mouseup', onEnd);
+
+        box.addEventListener('touchstart', onStart, { passive: true });
+        box.addEventListener('touchmove', onMove, { passive: false });
+        box.addEventListener('touchend', onEnd);
+        box.addEventListener('touchcancel', onEnd);
+
+        window.addEventListener('resize', () => updateLayout(0));
+        setTimeout(() => updateLayout(0), 100);
+      }
+
+      // دالة التحديث الشامل وصياغة لوحة الترجمات
+      function updateSentenceAndTranslation() {
+        const nomItems = document.querySelectorAll('#nominativWheel .item');
+        const verbItems = document.querySelectorAll('#verbWheel .item');
+        const akkItems = document.querySelectorAll('#akkusativWheel .item');
+
+        if (!nomItems.length || !verbItems.length || !akkItems.length) return;
+
+        const nomItem = nomItems[selectedNomIndex];
+        const akkItem = akkItems[selectedAkkIndex];
+
+        const currentNomText = isArEnabled ? nomItem.getAttribute('data-ar').split(' (') : nomItem.getAttribute('data-en');
+        const currentAkkText = isArEnabled ? akkItem.getAttribute('data-ar').split(' (') : akkItem.getAttribute('data-en');
+        const currentVerbConjugated = verbConjugations[selectedVerbIndex][selectedNomIndex];
+
+        document.getElementById('sentenceOutput').innerHTML = `
+        <span class="nom-hl">${currentNomText}</span> 
+        <span class="verb-hl">${currentVerbConjugated}</span> 
+        <span class="akk-hl">${currentAkkText}</span>
+      `;
+
+        const naturalTranslation = generateNaturalArabic(selectedNomIndex, selectedVerbIndex, selectedAkkIndex);
+        document.getElementById('directTranslation').innerText = naturalTranslation;
+      }
+
+      // تفعيل زر التبديل والتحكم بالـ innerText المباشر للضمائر والأفعال بالمستند
+      const langToggle = document.getElementById('langToggle');
+      langToggle.addEventListener('click', () => {
+        langToggle.classList.toggle('active');
+        isArEnabled = langToggle.classList.contains('active');
+
+        document.querySelectorAll('#nominativWheel .item').forEach(item => {
+          item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
+        });
+
+        document.querySelectorAll('#verbWheel .item').forEach(item => {
+          item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
+        });
+
+        document.querySelectorAll('#akkusativWheel .item').forEach(item => {
+          item.innerText = isArEnabled ? item.getAttribute('data-ar') : item.getAttribute('data-en');
+        });
+
+        updateSentenceAndTranslation();
+        window.dispatchEvent(new Event('resize'));
+      });
+
+      // --- منطق نافذة التنبيه المخصصة وحزم الملف للتحميل أوفلاين ---
+      const downloadBtn = document.getElementById('downloadBtn');
+      const customAlert = document.getElementById('customAlert');
+      const alertConfirm = document.getElementById('alertConfirm');
+      const alertCancel = document.getElementById('alertCancel');
+
+      // إظهار نافذة التنبيه المخصصة الفخمة عند ضغط زر التحميل
+      downloadBtn.addEventListener('click', () => {
+        customAlert.classList.add('show');
+      });
+
+      // إغلاق النافذة عند الضغط على إلغاء
+      alertCancel.addEventListener('click', () => {
+        customAlert.classList.remove('show');
+      });
+
+      // دالة حزم الملف وتنزيله تلقائياً بصيغة مخصصة أوفلاين عند التأكيد
+      alertConfirm.addEventListener('click', () => {
+        customAlert.classList.remove('show');
+
+        // جلب الكود الكامل للمستند الحالي وتحويله لملف قابل للتنزيل
+        const htmlContent = document.documentElement.outerHTML;
+        const blob = new Blob(['<!DOCTYPE html>\n' + htmlContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Akkusativ_By_Awwad_Offline.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+
+      // إطلاق محركات التدوير الفورية المستقلة للـ 3 أعمدة
+      createInstantWheel('nominativBox', 'nominativWheel', (idx) => {
+        selectedNomIndex = idx;
+        updateSentenceAndTranslation();
+      }, 0);
+
+      createInstantWheel('verbBox', 'verbWheel', (idx) => {
+        selectedVerbIndex = idx;
+        updateSentenceAndTranslation();
+      }, 0);
+
+      createInstantWheel('akkusativBox', 'akkusativWheel', (idx) => {
+        selectedAkkIndex = idx;
+        updateSentenceAndTranslation();
+      }, 0);
+
+      updateSentenceAndTranslation();
+    </script>
+  </body>
+  
+  </html>
